@@ -37,12 +37,13 @@ public class Main {
 		//"(([aaaabsaaaa]){0,1})\n"
 		// "((sa+d+)?)+(pp?)\n"
 		//"(([a-b])){0,1}\n"
-		String content = "ba+a+\n";// "((sdg))(ppp?)(qwqw|qw)+xyz|(as|df)[a-x]abc{1,51}(foo)|bar(agga)|(aaa)\n";
+		//definiuję co będę parsował
+		String content = "ba\n";// "((sdg))(ppp?)(qwqw|qw)+xyz|(as|df)[a-x]abc{1,51}(foo)|bar(agga)|(aaa)\n";
 
-		Pattern pattern = Pattern.compile(content);
-		Matcher matcher = pattern.matcher("sdgpppqwxyzgabcc");
-		boolean match = matcher.matches();
-		System.out.println("JSON File:\n" + content + "\n\n");
+//		Pattern pattern = Pattern.compile(content);
+		//Matcher matcher = pattern.matcher("sdgpppqwxyzgabcc");
+		//boolean match = matcher.matches();
+		System.out.println("Zawartość zmiennej content:\n" + content);
 
 		ANTLRInputStream input = new ANTLRInputStream(content);
 
@@ -54,51 +55,51 @@ public class Main {
 
 		ParseTree tree = parser.prog();
 
-		ParseTreeWalker walker2 = new ParseTreeWalker();
-		ParseTreeProperty<Expression> propTree = new ParseTreeProperty<>();
+//		ParseTreeWalker walker2 = new ParseTreeWalker();
+//		ParseTreeProperty<Expression> propTree = new ParseTreeProperty<>();
 
 		// ==check few Classes
 
 		// === parser.prog NULL values - NONE children
-		ProgContext context = parser.prog(); // NULL children values
-		if (context.bracketExpression() != null) {
-			System.out.println(context.matchCountExpression().size());
-		}
+//		ProgContext context = parser.prog(); // NULL children values
+//		if (context.bracketExpression() != null) {
+//			System.out.println("Context" + context.matchCountExpression().size());
+//		}
 
-		List<BracketExpressionContext> bracketExpression = context.bracketExpression();
-		bracketExpression.stream().forEach(cntx -> System.out.println("Sysout" + cntx.toStringTree()));
+//		List<BracketExpressionContext> bracketExpression = context.bracketExpression();
+//		bracketExpression.stream().forEach(cntx -> System.out.println("Sysout" + cntx.toStringTree()));
 		// ===parser.prog NULL values - NONE children
 
 		// FEW WAYS OF GETTING NODES
 		// getting ROOT (RegularExpr)
-		Object payloadRootObject = tree.getPayload();
+		//Object payloadRootObject = tree.getPayload();
 		ProgContext payloadRoot = (ProgContext) tree.getPayload();
 
-		Interval sourceInterval = tree.getSourceInterval();
-		String text = tree.getText();
-		if (payloadRootObject instanceof ProgContext) {
-			System.out.println("PROG CONTEXT");
-		}
+//		Interval sourceInterval = tree.getSourceInterval();
+//		String text = tree.getText();
+//		if (payloadRootObject instanceof ProgContext) {
+//			System.out.println("PROG CONTEXT");
+//		}
 
 
 		// ==Listeners and Visitor
-		MyListener extractor = new MyListener();
-		ParseTreeWalker walker = new ParseTreeWalker();
+//		MyListener extractor = new MyListener();
+//		ParseTreeWalker walker = new ParseTreeWalker();
 		// walker.walk(extractor, tree);
-		ParseTreeWalker.DEFAULT.walk(extractor, payloadRoot);
+		//ParseTreeWalker.DEFAULT.walk(extractor, payloadRoot);
 		MyVisitor<Expression> visitor = new MyVisitor<>();
 		RegularExpr regularExpr2 = (RegularExpr) visitor.visit(payloadRoot);
 
 		System.out.println("ParseTree:\n" + tree.toStringTree(parser) + "\n");
-		System.out.println("PP:\n" + context.toStringTree(parser) + "\n");
+//		System.out.println("PP:\n" + context.toStringTree(parser) + "\n");
 
-		Simplifier simplifier = new Simplifier();
-		List<Expression> allExpressions = regularExpr2.getExpressions();
-		
+		//Simplifier simplifier = new Simplifier();
+		//List<Expression> allExpressions = regularExpr2.getExpressions();
+
 		TreeSearcher treeSearcher = new TreeSearcher();
 		treeSearcher.simplifyProg(regularExpr2);
 		
-		System.out.println(regularExpr2.toString());
+		//System.out.println(regularExpr2.toString());
 
 
 	}

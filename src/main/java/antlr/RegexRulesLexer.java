@@ -1,4 +1,3 @@
-// Generated from /home/tk/IdeaProjects/regex-simplifier/RegexRules.g4 by ANTLR 4.7
 package antlr;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

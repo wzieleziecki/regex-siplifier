@@ -25,7 +25,7 @@ public class TreeSearcher {
 			doSimplify(regularExpr, copyExpressions);
 
 		}
-		System.out.println("Simplified Regex: " + regularExpr.toString()+"\n");
+		System.out.println("Simplified Regex: " + regularExpr.toString());
 	}
 
 	/**

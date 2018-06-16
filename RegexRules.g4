@@ -20,9 +20,9 @@ alternativeExpression: ( parentheseExpression|basicExpression|matchCountExpressi
 	
 //3.liczbawystapien abc{3,5}
 matchCountExpression:    basicExpression rangeOccurence
-					|	 bracketExpression rangeOccurence 
+					|	 bracketExpression rangeOccurence
 					|	 parentheseExpression rangeOccurence;
-rangeOccurence: LEFT_BRACE NUMBER COMMA NUMBER RIGHT_BRACE 
+rangeOccurence: LEFT_BRACE NUMBER COMMA NUMBER RIGHT_BRACE
 			  | LEFT_BRACE NUMBER COMMA  RIGHT_BRACE;
 
 //4.jeden element z przedzialu [a-b]
